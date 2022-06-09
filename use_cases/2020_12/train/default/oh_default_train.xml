@@ -66,28 +66,28 @@
       <Q>0</Q>
       <Fourier>8760, 4380, 2920, 2190, 438, 24, 12, 6</Fourier>
       <Segment grouping='interpolate'>
-          <macroParameter>YEAR</macroParameter>
-          <Classifier class='Models' type='PostProcessor'>classifier</Classifier>
-          <evalMode>full</evalMode>
-          <subspace pivotLength='168' shift='zero'>HOUR</subspace>
-          <evaluationClusterChoice>random</evaluationClusterChoice>
-        </Segment>
+        <macroParameter>YEAR</macroParameter>
+        <Classifier class='Models' type='PostProcessor'>classifier</Classifier>
+        <evalMode>full</evalMode>
+        <subspace pivotLength='168' shift='zero'>HOUR</subspace>
+        <evaluationClusterChoice>random</evaluationClusterChoice>
+      </Segment>
       <clusterEvalMode>clustered</clusterEvalMode>
       <reseedCopies>True</reseedCopies>
       <preserveInputCDF>False</preserveInputCDF>
       <seed>42</seed>
     </ROM>
     <PostProcessor name="classifier" subType="DataMining">
-        <KDD labelFeature="labels" lib="SciKitLearn">
-          <Features>TOTALLOAD</Features>
-          <SKLtype>cluster|KMeans</SKLtype>
-          <n_clusters>20</n_clusters>
-          <tol>1E-12</tol>
-          <init>k-means++</init>
-          <random_state>3</random_state>
-          <precompute_distances>True</precompute_distances>
-        </KDD>
-      </PostProcessor>
+      <KDD labelFeature="labels" lib="SciKitLearn">
+        <Features>TOTALLOAD</Features>
+        <SKLtype>cluster|KMeans</SKLtype>
+        <n_clusters>20</n_clusters>
+        <tol>1E-12</tol>
+        <init>k-means++</init>
+        <random_state>3</random_state>
+        <precompute_distances>True</precompute_distances>
+      </KDD>
+    </PostProcessor>
   </Models>
 
   <OutStreams>

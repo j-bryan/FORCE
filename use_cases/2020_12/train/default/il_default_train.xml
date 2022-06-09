@@ -1,5 +1,4 @@
 <Simulation verbosity="debug">
-
   <RunInfo>
     <WorkingDir>IL</WorkingDir>
     <Sequence>load, train, meta, serialize, sample</Sequence>
