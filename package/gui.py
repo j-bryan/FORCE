@@ -9,6 +9,7 @@ import threading
 import time
 import datetime
 from collections.abc import Callable
+from typing import Optional, List
 
 import tkinter as tk
 from tkinter import filedialog
@@ -148,7 +149,7 @@ class BasicGUI:
         self._run_button.configure(state=tk.NORMAL)
         self._update_status(status='Ready')
 
-    def _update_status(self, status: str | None = None, time_elapsed: float | None = None) -> None:
+    def _update_status(self, status: Optional[str] = None, time_elapsed: Optional[float] = None) -> None:
         """
         Update the status panel.
         @In, status, str, the status to display
@@ -186,13 +187,13 @@ class BasicGUI:
         self._text.configure(state=tk.DISABLED)
         self._text.update()
 
-    def _build_script_command(self, filename: str) -> list[str]:
+    def _build_script_command(self, filename: str) -> List[str]:
         """
         Build the command to run a python script.
         @In, filename, str, the filename to run
         @Out, cmd, list[str], the command to run the script
         """
-        if filename.endswith('.py'):
+        if filename.endswith('.py') or filename.endswith('.pyc'):
             cmd = ['python', '-u', filename]
         elif filename.endswith('.exe'):
             cmd = [filename]
