@@ -14,9 +14,11 @@
 # limitations under the License.
 import re
 import sys
-from HERON.src.main import main
+# from HERON.src.main import main
+from HERON.src import main
 from gui import BasicGUI
 if __name__ == '__main__':
     sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
-    gui = BasicGUI()
-    gui.run_function(main)
+    gui = BasicGUI('HERON')
+    # gui.run_function(main)
+    gui.run_script(main.__file__)

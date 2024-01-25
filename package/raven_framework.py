@@ -20,8 +20,15 @@ Created on Feb 14, 2022
 This is a package that properly imports Driver and runs it.
 """
 import sys
+import tempfile
 from ravenframework.Driver import main
 from gui import BasicGUI
 if __name__ == '__main__':
-  gui = BasicGUI()
-  gui.run_function(lambda: sys.exit(main(True)))
+  gui = BasicGUI('RAVEN')
+  # FIXME: RAVEN gives a relative import error if we try to run main directly. Rather than
+  # creating a separate script file that is permanently in the package, we create a temporary
+  # file and run that. But if we can resolve that relative import error, we could just run
+  # the ravenframework.Driver file directly.
+  with tempfile.NamedTemporaryFile(mode='w+b', suffix='.py', buffering=0) as tmp:
+    tmp.write(b'import sys; from ravenframework.Driver import main; sys.exit(main(True))')
+    gui.run_script(tmp.name)
